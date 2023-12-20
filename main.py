@@ -84,25 +84,41 @@ class RhythmGame:
           sys.exit()
         if event.type == pygame.KEYDOWN:
           if event.key == pygame.K_KP_1:
-            pass
+            self.squareBL.image = pygame.transform.scale(self.squareBR.image, (175, 175))
+            self.squareBL.rect.x = 90+self.xoffset
+            self.squareBL.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_2:
-            pass
+            self.squareMB.image = pygame.transform.scale(self.squareMB.image, (175, 175))
+            self.squareMB.rect.x = 310+self.xoffset
+            self.squareMB.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_3:
-            pass
+            self.squareBR.image = pygame.transform.scale(self.squareBR.image, (175, 175))
+            self.squareBR.rect.x = 530+self.xoffset
+            self.squareBR.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_4:
-            pass
+            self.squareML.image = pygame.transform.scale(self.squareML.image, (175, 175))
+            self.squareML.rect.x = 90+self.xoffset
+            self.squareML.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_5:
-            pass
+            self.squareMM.image = pygame.transform.scale(self.squareMM.image, (175, 175))
+            self.squareMM.rect.x = 310+self.xoffset
+            self.squareMM.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_6:
-            pass
+            self.squareMR.image = pygame.transform.scale(self.squareMR.image, (175, 175))
+            self.squareMR.rect.x = 530+self.xoffset
+            self.squareMR.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_7:
             self.squareTL.image = pygame.transform.scale(self.squareTL.image, (175, 175))
             self.squareTL.rect.x = 90+self.xoffset
             self.squareTL.rect.y = 40+self.yoffset
           if event.key == pygame.K_KP_8:
-            pass
+            self.squareMT.image = pygame.transform.scale(self.squareMT.image, (175, 175))
+            self.squareMT.rect.x = 310+self.xoffset
+            self.squareMT.rect.y = 40+self.yoffset
           if event.key == pygame.K_KP_9:
-            pass
+            self.squareTR.image = pygame.transform.scale(self.squareTR.image, (175, 175))
+            self.squareTR.rect.x = 530+self.xoffset
+            self.squareTR.rect.y = 40+self.yoffset
 
       # Redraw the screen during each pass through the loop.
       self.screen.fill(self.bg_color)
@@ -121,10 +137,42 @@ class RhythmGame:
 
       # Check to see if the keys aren't pressed down.
       for event in pygame.event.get(pygame.KEYUP):
+        if event.key == pygame.K_KP_1:
+          self.squareBL.image = pygame.image.load('square.png')
+          self.squareBL.rect.x = 80+self.xoffset
+          self.squareBL.rect.y = 470+self.yoffset
+        if event.key == pygame.K_KP_2:
+          self.squareMB.image = pygame.image.load('square.png')
+          self.squareMB.rect.x = 300+self.xoffset
+          self.squareMB.rect.y = 470+self.yoffset
+        if event.key == pygame.K_KP_3:
+          self.squareBR.image = pygame.image.load('square.png')
+          self.squareBR.rect.x = 520+self.xoffset
+          self.squareBR.rect.y = 470+self.yoffset
+        if event.key == pygame.K_KP_4:
+          self.squareML.image = pygame.image.load('square.png')
+          self.squareML.rect.x = 80+self.xoffset
+          self.squareML.rect.y = 250+self.yoffset
+        if event.key == pygame.K_KP_5:
+          self.squareMM.image = pygame.image.load('square.png')
+          self.squareMM.rect.x = 300+self.xoffset
+          self.squareMM.rect.y = 250+self.yoffset
+        if event.key == pygame.K_KP_6:
+          self.squareMR.image = pygame.image.load('square.png')
+          self.squareMR.rect.x = 520+self.xoffset
+          self.squareMR.rect.y = 250+self.yoffset
         if event.key == pygame.K_KP_7:
           self.squareTL.image = pygame.image.load('square.png')
           self.squareTL.rect.x = 80+self.xoffset
           self.squareTL.rect.y = 30+self.yoffset
+        if event.key == pygame.K_KP_8:
+          self.squareMT.image = pygame.image.load('square.png')
+          self.squareMT.rect.x = 300+self.xoffset
+          self.squareMT.rect.y = 30+self.yoffset
+        if event.key == pygame.K_KP_9:
+          self.squareTR.image = pygame.image.load('square.png')
+          self.squareTR.rect.x = 520+self.xoffset
+          self.squareTR.rect.y = 30+self.yoffset
 
 if __name__ == '__main__':
   # Make a game instance, and run the game.
