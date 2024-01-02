@@ -13,6 +13,8 @@ black = (0, 0, 0)
 red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
+lvl1 = [1, 1, 2, 1]
+lvl1_pause = 2
 
 
 
@@ -51,35 +53,36 @@ class RhythmGame:
     msg = font_style.render("Score: " + str(score), True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
 
-  def RHYTHM(self, level, level_diff):
+  def RHYTHM(self, level, level_pause):
     for beat in level:
       if beat == 1: # Upper left
         pass # Flash the correct square
-        time.sleep(level_diff)
+        self.squareTL.image = pygame.image.load('call_square.png')
+        time.sleep(level_pause)
       if beat == 2: # Upper middle
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 3: # Upper right
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 4: # Middle left
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 5: # Middle middle
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 6: # Middle right
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 7: # Lower left
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 8: # Lower middle
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
       if beat == 9: # Lower right
         pass # Flash the correct square
-        time.sleep(level_diff)
+        time.sleep(level_pause)
 
   def run_game(self):
     """Start the main loop for the game."""
@@ -89,6 +92,8 @@ class RhythmGame:
         if event.type == pygame.QUIT:
           sys.exit()
         if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_KP_ENTER:
+            self.RHYTHM(lvl1, lvl1_pause)
           if event.key == pygame.K_KP_1:
             self.squareBL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareBL.rect.x = 90+self.xoffset
