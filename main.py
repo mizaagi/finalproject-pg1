@@ -4,8 +4,9 @@ import random
 import time
 from settings import Settings
 from square import Square
+pygame.init()
 
-
+font_style = pygame.font.SysFont("sans-serif", 30)
 white = (255, 255, 255)
 yellow = (255, 255, 100)
 black = (0, 0, 0)
@@ -16,38 +17,8 @@ blue = (50, 150, 210)
 
 
 
-def yourScore(score):
-  msg = font_style.render("Score: " + str(score), True, yellow)
-  DISPLAYSURF.blit(msg, [0, 0])
-def RHYTHM(level, level_diff):
-  for beat in level:
-    if beat == 1: # Upper left
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 2: # Upper middle
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 3: # Upper right
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 4: # Middle left
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 5: # Middle middle
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 6: # Middle right
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 7: # Lower left
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 8: # Lower middle
-      pass # Flash the correct square
-      time.sleep(level_diff)
-    if beat == 9: # Lower right
-      pass # Flash the correct square
-      time.sleep(level_diff)
+
+
 
 class RhythmGame:
   """Overall class to manage game assets and behavior."""
@@ -58,6 +29,8 @@ class RhythmGame:
     self.settings = Settings()
     self.xoffset = xoffset
     self.yoffset = yoffset
+    self.score = 0
+    self.level = 1
 
     self.screen = pygame.display.set_mode(
       (self.settings.screen_width, self.settings.screen_height))
@@ -74,6 +47,39 @@ class RhythmGame:
     self.squareBR = Square(self, 520+xoffset, 470+yoffset)
 
     self.bg_color = (25, 60, 105)
+  def yourScore(self, score):
+    msg = font_style.render("Score: " + str(score), True, yellow)
+    self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
+
+  def RHYTHM(self, level, level_diff):
+    for beat in level:
+      if beat == 1: # Upper left
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 2: # Upper middle
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 3: # Upper right
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 4: # Middle left
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 5: # Middle middle
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 6: # Middle right
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 7: # Lower left
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 8: # Lower middle
+        pass # Flash the correct square
+        time.sleep(level_diff)
+      if beat == 9: # Lower right
+        pass # Flash the correct square
+        time.sleep(level_diff)
 
   def run_game(self):
     """Start the main loop for the game."""
@@ -131,6 +137,7 @@ class RhythmGame:
       self.squareBL.blitme()
       self.squareMB.blitme()
       self.squareBR.blitme()
+      self.yourScore(self.score)
       
       # Make the most recently drawn screen visible.
       pygame.display.flip()
@@ -157,6 +164,7 @@ class RhythmGame:
           self.squareMM.image = pygame.image.load('square.png')
           self.squareMM.rect.x = 300+self.xoffset
           self.squareMM.rect.y = 250+self.yoffset
+          self.score += 1
         if event.key == pygame.K_KP_6:
           self.squareMR.image = pygame.image.load('square.png')
           self.squareMR.rect.x = 520+self.xoffset
@@ -176,5 +184,5 @@ class RhythmGame:
 
 if __name__ == '__main__':
   # Make a game instance, and run the game.
-  ins = RhythmGame(xoffset=-65)
+  ins = RhythmGame(xoffset=-60)
   ins.run_game()
