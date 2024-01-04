@@ -13,6 +13,7 @@ class Square:
     self.rect.y = y
     self.rect.size = (50, 50)
     self.baseWid = self.rect.width
+    self.tapped = False
     #self.rect.width = self.image.get_rect().width
     #self.rect.length = self.image.get_rect().width
     #if w and l:
@@ -26,10 +27,10 @@ class Square:
 
   def call(self, lvl_pause):
     self.image = pygame.image.load('call_square.png')
-    _tapped = False
+    self.tapped = False
     start_time = time.time()
     time.sleep(lvl_pause)
-    while not _tapped:
+    while not self.tapped:
       pass
     end_time = time.time()
     if end_time - start_time > lvl_pause:
