@@ -1,4 +1,5 @@
 import pygame
+import time
 
 class Square:
   """Class for the squares."""
@@ -23,5 +24,16 @@ class Square:
   def blitme(self):
     self.screen.blit(self.image, self.rect)
 
-  def change_size(self, w, l):
-    pass
+  def call(self, lvl_pause):
+    self.image = pygame.image.load('call_square.png')
+    _tapped = False
+    start_time = time.time()
+    time.sleep(lvl_pause)
+    while not _tapped:
+      pass
+    end_time = time.time()
+    if end_time - start_time > lvl_pause:
+      return False
+    else:
+      return True
+    
