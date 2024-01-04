@@ -59,6 +59,7 @@ class RhythmGame:
         pass # Flash the correct square
         self.squareTL.image = pygame.image.load('call_square.png')
         time.sleep(level_pause)
+        #self.squareTL.image = pygame.image.load('square.png')
       if beat == 2: # Upper middle
         pass # Flash the correct square
         time.sleep(level_pause)
@@ -92,7 +93,7 @@ class RhythmGame:
         if event.type == pygame.QUIT:
           sys.exit()
         if event.type == pygame.KEYDOWN:
-          if event.key == pygame.K_KP_ENTER:
+          if event.key == pygame.K_RETURN:
             self.RHYTHM(lvl1, lvl1_pause)
           if event.key == pygame.K_KP_1:
             self.squareBL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))

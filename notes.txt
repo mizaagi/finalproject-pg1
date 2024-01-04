@@ -7,3 +7,9 @@ self.squareMR = Square(self, 520+xoffset, 250+yoffset)
 self.squareBL = Square(self, 80+xoffset, 470+yoffset)
 self.squareMB = Square(self, 300+xoffset, 470+yoffset)
 self.squareBR = Square(self, 520+xoffset, 470+yoffset)
+
+start_time_TL = time.time()
+end_time_TL = None
+while end_time_TL == None:
+  pass
+if end_time_TL - start_time_TL
