@@ -13,7 +13,7 @@ black = (0, 0, 0)
 red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
-lvl1 = [1, 1, 2, 1]
+lvl1 = [1]
 lvl1_pause = 2
 
 
@@ -57,9 +57,7 @@ class RhythmGame:
     for beat in level:
       if beat == 1: # Upper left
         pass # Flash the correct square
-        self.squareTL.image = pygame.image.load('call_square.png')
-        time.sleep(level_pause)
-        #self.squareTL.image = pygame.image.load('square.png')
+        self.squareTL.call(level_pause)
       if beat == 2: # Upper middle
         pass # Flash the correct square
         time.sleep(level_pause)
@@ -120,6 +118,7 @@ class RhythmGame:
             self.squareMR.rect.x = 530+self.xoffset
             self.squareMR.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_7:
+            self.squareTL.tapped = True
             self.squareTL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareTL.rect.x = 90+self.xoffset
             self.squareTL.rect.y = 40+self.yoffset
