@@ -30,7 +30,7 @@ class Square:
     self.tapped = False
     start_time = time.time()
     time.sleep(lvl_pause)
-    while not self.tapped:
+    while self.tapped == False:
       pass
     end_time = time.time()
     if end_time - start_time > lvl_pause:

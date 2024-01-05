@@ -4,6 +4,7 @@ import random
 import time
 from settings import Settings
 from square import Square
+import threading
 pygame.init()
 
 font_style = pygame.font.SysFont("sans-serif", 30)
@@ -82,6 +83,29 @@ class RhythmGame:
       if beat == 9: # Lower right
         pass # Flash the correct square
         time.sleep(level_pause)
+  def check_call(self):
+    while True:
+      for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_KP_1:
+            self.squareBL.tapped = True
+          if event.key == pygame.K_KP_2:
+            self.squareMB.tapped = True
+          if event.key == pygame.K_KP_3:
+            self.squareBR.tapped = True
+          if event.key == pygame.K_KP_4:
+            self.squareML.tapped = True
+          if event.key == pygame.K_KP_5:
+            self.squareMM.tapped = True
+          if event.key == pygame.K_KP_6:
+            self.squareMR.tapped = True
+          if event.key == pygame.K_KP_7:
+            self.squareTL.tapped = True
+          if event.key == pygame.K_KP_8:
+            self.squareMT.tapped = True
+          if event.key == pygame.K_KP_9:
+            self.squareTR.tapped = True
+
 
   def run_game(self):
     """Start the main loop for the game."""
@@ -190,4 +214,5 @@ class RhythmGame:
 if __name__ == '__main__':
   # Make a game instance, and run the game.
   ins = RhythmGame(xoffset=-60)
+  #checkCall = threading.Thread(target=ins.check_call, args=(1,))
   ins.run_game()
