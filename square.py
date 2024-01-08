@@ -14,27 +14,21 @@ class Square:
     self.rect.size = (50, 50)
     self.baseWid = self.rect.width
     self.tapped = False
-    #self.rect.width = self.image.get_rect().width
-    #self.rect.length = self.image.get_rect().width
-    #if w and l:
-      #self.rect.width = w
-      #self.rect.length = l
-    #exec(f"self.rect.{pos} = self.screen_rect.{pos}")
-    #self.rect.topleft = self.screen_rect.topleft
+    self.gotit = None
 
   def blitme(self):
     self.screen.blit(self.image, self.rect)
 
   def call(self, lvl_pause):
+    _tick = 0
     self.image = pygame.image.load('call_square.png')
     self.tapped = False
     start_time = time.time()
     time.sleep(lvl_pause)
     while self.tapped == False:
-      pass
+      _tick += 1
     end_time = time.time()
-    if end_time - start_time > lvl_pause:
-      return False
+    if round((end_time - start_time), 2) > lvl_pause:
+      self.gotit = False
     else:
-      return True
-    
+      self.gotit = True
