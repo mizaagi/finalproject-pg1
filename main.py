@@ -7,6 +7,53 @@ from square import Square
 import threading
 pygame.init()
 
+
+def thread_function():
+  time.sleep(1)
+  while True:
+    # Watch for keyboard and mouse events.
+    for event in pygame.event.get():
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_KP_1:
+          ins.squareBL.tapped = True
+        if event.key == pygame.K_KP_2:
+          ins.squareMB.tapped = True
+        if event.key == pygame.K_KP_3:
+          ins.squareBR.tapped = True
+        if event.key == pygame.K_KP_4:
+          ins.squareML.tapped = True
+        if event.key == pygame.K_KP_5:
+          ins.squareMM.tapped = True
+        if event.key == pygame.K_KP_6:
+          ins.squareMR.tapped = True
+        if event.key == pygame.K_KP_7:
+          ins.squareTL.tapped = True
+        if event.key == pygame.K_KP_8:
+          ins.squareMT.tapped = True
+        if event.key == pygame.K_KP_9:
+          ins.squareTR.tapped = True
+      if event.type == pygame.KEYUP:
+        if event.key == pygame.K_KP_1:
+          ins.squareBL.tapped = False
+        if event.key == pygame.K_KP_2:
+          ins.squareMB.tapped = False
+        if event.key == pygame.K_KP_3:
+          ins.squareBR.tapped = False
+        if event.key == pygame.K_KP_4:
+          ins.squareML.tapped = False
+        if event.key == pygame.K_KP_5:
+          ins.squareMM.tapped = False
+        if event.key == pygame.K_KP_6:
+          ins.squareMR.tapped = False
+        if event.key == pygame.K_KP_7:
+          ins.squareTL.tapped = False
+        if event.key == pygame.K_KP_8:
+          ins.squareMT.tapped = False
+        if event.key == pygame.K_KP_9:
+          ins.squareTR.tapped = False
+
+
+
 font_style = pygame.font.SysFont("sans-serif", 30)
 white = (255, 255, 255)
 yellow = (255, 255, 100)
@@ -208,6 +255,7 @@ class RhythmGame:
 
 if __name__ == '__main__':
   # Make a game instance, and run the game.
+  x = threading.Thread(target=thread_function, args=(1,), daemon=True)
   ins = RhythmGame(xoffset=-60)
   #checkCall = threading.Thread(target=ins.check_call, args=(1,))
   ins.run_game()
