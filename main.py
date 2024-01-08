@@ -83,29 +83,7 @@ class RhythmGame:
       if beat == 9: # Lower right
         pass # Flash the correct square
         time.sleep(level_pause)
-  def check_call(self):
-    while True:
-      for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-          if event.key == pygame.K_KP_1:
-            self.squareBL.tapped = True
-          if event.key == pygame.K_KP_2:
-            self.squareMB.tapped = True
-          if event.key == pygame.K_KP_3:
-            self.squareBR.tapped = True
-          if event.key == pygame.K_KP_4:
-            self.squareML.tapped = True
-          if event.key == pygame.K_KP_5:
-            self.squareMM.tapped = True
-          if event.key == pygame.K_KP_6:
-            self.squareMR.tapped = True
-          if event.key == pygame.K_KP_7:
-            self.squareTL.tapped = True
-          if event.key == pygame.K_KP_8:
-            self.squareMT.tapped = True
-          if event.key == pygame.K_KP_9:
-            self.squareTR.tapped = True
-
+    
 
   def run_game(self):
     """Start the main loop for the game."""
@@ -118,26 +96,32 @@ class RhythmGame:
           if event.key == pygame.K_RETURN:
             self.RHYTHM(lvl1, lvl1_pause)
           if event.key == pygame.K_KP_1:
+            self.squareBL.tapped = True
             self.squareBL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareBL.rect.x = 90+self.xoffset
             self.squareBL.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_2:
+            self.squareMB.tapped = True
             self.squareMB.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareMB.rect.x = 310+self.xoffset
             self.squareMB.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_3:
+            self.squareBR.tapped = True
             self.squareBR.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareBR.rect.x = 530+self.xoffset
             self.squareBR.rect.y = 480+self.yoffset
           if event.key == pygame.K_KP_4:
+            self.squareML.tapped = True
             self.squareML.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareML.rect.x = 90+self.xoffset
             self.squareML.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_5:
+            self.squareMM.tapped = True
             self.squareMM.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareMM.rect.x = 310+self.xoffset
             self.squareMM.rect.y = 260+self.yoffset
           if event.key == pygame.K_KP_6:
+            self.squareMR.tapped = True
             self.squareMR.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareMR.rect.x = 530+self.xoffset
             self.squareMR.rect.y = 260+self.yoffset
@@ -147,10 +131,12 @@ class RhythmGame:
             self.squareTL.rect.x = 90+self.xoffset
             self.squareTL.rect.y = 40+self.yoffset
           if event.key == pygame.K_KP_8:
+            self.squareMT.tapped = True
             self.squareMT.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareMT.rect.x = 310+self.xoffset
             self.squareMT.rect.y = 40+self.yoffset
           if event.key == pygame.K_KP_9:
+            self.squareTR.tapped = True
             self.squareTR.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
             self.squareTR.rect.x = 530+self.xoffset
             self.squareTR.rect.y = 40+self.yoffset
@@ -174,39 +160,48 @@ class RhythmGame:
       # Check to see if the keys aren't pressed down.
       for event in pygame.event.get(pygame.KEYUP):
         if event.key == pygame.K_KP_1:
+          self.squareBL.tapped = False
           self.squareBL.image = pygame.image.load('square.png')
           self.squareBL.rect.x = 80+self.xoffset
           self.squareBL.rect.y = 470+self.yoffset
         if event.key == pygame.K_KP_2:
+          self.squareMB.tapped = False
           self.squareMB.image = pygame.image.load('square.png')
           self.squareMB.rect.x = 300+self.xoffset
           self.squareMB.rect.y = 470+self.yoffset
         if event.key == pygame.K_KP_3:
+          self.squareBR.tapped = False
           self.squareBR.image = pygame.image.load('square.png')
           self.squareBR.rect.x = 520+self.xoffset
           self.squareBR.rect.y = 470+self.yoffset
         if event.key == pygame.K_KP_4:
+          self.squareML.tapped = False
           self.squareML.image = pygame.image.load('square.png')
           self.squareML.rect.x = 80+self.xoffset
           self.squareML.rect.y = 250+self.yoffset
         if event.key == pygame.K_KP_5:
+          self.squareMM.tapped = False
           self.squareMM.image = pygame.image.load('square.png')
           self.squareMM.rect.x = 300+self.xoffset
           self.squareMM.rect.y = 250+self.yoffset
           self.score += 1
         if event.key == pygame.K_KP_6:
+          self.squareMR.tapped = False
           self.squareMR.image = pygame.image.load('square.png')
           self.squareMR.rect.x = 520+self.xoffset
           self.squareMR.rect.y = 250+self.yoffset
         if event.key == pygame.K_KP_7:
+          self.squareTL.tapped = False
           self.squareTL.image = pygame.image.load('square.png')
           self.squareTL.rect.x = 80+self.xoffset
           self.squareTL.rect.y = 30+self.yoffset
         if event.key == pygame.K_KP_8:
+          self.squareMT.tapped = False
           self.squareMT.image = pygame.image.load('square.png')
           self.squareMT.rect.x = 300+self.xoffset
           self.squareMT.rect.y = 30+self.yoffset
         if event.key == pygame.K_KP_9:
+          self.squareTR.tapped = False
           self.squareTR.image = pygame.image.load('square.png')
           self.squareTR.rect.x = 520+self.xoffset
           self.squareTR.rect.y = 30+self.yoffset
