@@ -1,10 +1,9 @@
 import pygame
-import time
 
 class Square:
   """Class for the squares."""
 
-  def __init__(self, ry_game, x, y):
+  def __init__(self, ry_game, x, y, name):
     self.screen = ry_game.screen
     self.screen_rect = ry_game.screen.get_rect()
     self.image = pygame.image.load('square.png')
@@ -15,20 +14,10 @@ class Square:
     self.baseWid = self.rect.width
     self.tapped = False
     self.gotit = None
+    self.name = name
 
   def blitme(self):
     self.screen.blit(self.image, self.rect)
 
   def call(self, lvl_pause):
-    _tick = 0
-    self.image = pygame.image.load('call_square.png')
-    self.tapped = False
-    start_time = time.time()
-    time.sleep(lvl_pause)
-    while self.tapped == False:
-      _tick += 1
-    end_time = time.time()
-    if round((end_time - start_time), 2) > lvl_pause:
-      self.gotit = False
-    else:
-      self.gotit = True
+    exec(self.name + "called = True")
