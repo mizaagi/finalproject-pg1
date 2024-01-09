@@ -4,11 +4,52 @@ import random
 import time
 from settings import Settings
 from square import Square
+import caller as c
 import threading
 pygame.init()
 
+font_style = pygame.font.SysFont("sans-serif", 30)
+white = (255, 255, 255)
+yellow = (255, 255, 100)
+black = (0, 0, 0)
+red = (210, 50, 80)
+green = (0, 255, 0)
+blue = (50, 150, 210)
+lvl1 = [1]
+lvl1_pause = 2
+TLcalled = None
+MTcalled = None
+TRcalled = None
+MLcalled = None
+MMcalled = None
+MRcalled = None
+BLcalled = None
+MBcalled = None
+BRcalled = None
 
-def thread_function():
+def callCheckThread():
+  time.sleep(1)
+  while True:
+    if TLcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if MTcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if TRcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if MLcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if MMcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if MRcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if BLcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if BMcalled:
+      c.Call(squareTL, ins.lvl_pause)
+    if BRcalled:
+      c.Call(squareTL, ins.lvl_pause)
+
+def tapCheckThread():
   time.sleep(1)
   while True:
     # Watch for keyboard and mouse events.
@@ -53,23 +94,6 @@ def thread_function():
           ins.squareTR.tapped = False
 
 
-
-font_style = pygame.font.SysFont("sans-serif", 30)
-white = (255, 255, 255)
-yellow = (255, 255, 100)
-black = (0, 0, 0)
-red = (210, 50, 80)
-green = (0, 255, 0)
-blue = (50, 150, 210)
-lvl1 = [1]
-lvl1_pause = 2
-
-
-
-
-
-
-
 class RhythmGame:
   """Overall class to manage game assets and behavior."""
 
@@ -81,20 +105,21 @@ class RhythmGame:
     self.yoffset = yoffset
     self.score = 0
     self.level = 1
+    self.lvl_pause = lvl1_pause
 
     self.screen = pygame.display.set_mode(
       (self.settings.screen_width, self.settings.screen_height))
     pygame.display.set_caption("Final Project")
 
-    self.squareTL = Square(self, 80+xoffset, 30+yoffset)
-    self.squareMT = Square(self, 300+xoffset, 30+yoffset)
-    self.squareTR = Square(self, 520+xoffset, 30+yoffset)
-    self.squareML = Square(self, 80+xoffset, 250+yoffset)
-    self.squareMM = Square(self, 300+xoffset, 250+yoffset)
-    self.squareMR = Square(self, 520+xoffset, 250+yoffset)
-    self.squareBL = Square(self, 80+xoffset, 470+yoffset)
-    self.squareMB = Square(self, 300+xoffset, 470+yoffset)
-    self.squareBR = Square(self, 520+xoffset, 470+yoffset)
+    self.squareTL = Square(self, 80+xoffset, 30+yoffset, "TL")
+    self.squareMT = Square(self, 300+xoffset, 30+yoffset, "MT")
+    self.squareTR = Square(self, 520+xoffset, 30+yoffset, "TR")
+    self.squareML = Square(self, 80+xoffset, 250+yoffset, "ML")
+    self.squareMM = Square(self, 300+xoffset, 250+yoffset, "MM")
+    self.squareMR = Square(self, 520+xoffset, 250+yoffset, "MR")
+    self.squareBL = Square(self, 80+xoffset, 470+yoffset, "BL")
+    self.squareMB = Square(self, 300+xoffset, 470+yoffset, "MB")
+    self.squareBR = Square(self, 520+xoffset, 470+yoffset, "BR")
 
     self.bg_color = (25, 60, 105)
   def yourScore(self, score):
@@ -102,6 +127,7 @@ class RhythmGame:
     self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
 
   def RHYTHM(self, level, level_pause):
+    self.level_pause = level_pause
     for beat in level:
       if beat == 1: # Upper left
         pass # Flash the correct square
@@ -255,7 +281,8 @@ class RhythmGame:
 
 if __name__ == '__main__':
   # Make a game instance, and run the game.
-  x = threading.Thread(target=thread_function, args=(1,), daemon=True)
+  _callCheckThread = threading.Thread(target=callCheckThread, args=(1,), daemon=True)
+  _tapCheckThread = threading.Thread(target=tapCheckThread, args=(1,), daemon=True)
   ins = RhythmGame(xoffset=-60)
   #checkCall = threading.Thread(target=ins.check_call, args=(1,))
   ins.run_game()
