@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 import time
 from settings import Settings
 from square import Square
@@ -31,23 +30,23 @@ def callCheckThread():
   time.sleep(1)
   while True:
     if TLcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareTL, ins.lvl_pause)
     if MTcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareMT, ins.lvl_pause)
     if TRcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareTR, ins.lvl_pause)
     if MLcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareML, ins.lvl_pause)
     if MMcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareMM, ins.lvl_pause)
     if MRcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareMR, ins.lvl_pause)
     if BLcalled:
-      c.Call(squareTL, ins.lvl_pause)
-    if BMcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareBL, ins.lvl_pause)
+    if MBcalled:
+      c.Call(ins.squareMB, ins.lvl_pause)
     if BRcalled:
-      c.Call(squareTL, ins.lvl_pause)
+      c.Call(ins.squareBR, ins.lvl_pause)
 
 def tapCheckThread():
   time.sleep(1)
@@ -141,7 +140,7 @@ class RhythmGame:
       if beat == 4: # Middle left
         pass # Flash the correct square
         time.sleep(level_pause)
-      if beat == 5: # Middle middle
+      if beat == 5: # Middle
         pass # Flash the correct square
         time.sleep(level_pause)
       if beat == 6: # Middle right
@@ -284,5 +283,4 @@ if __name__ == '__main__':
   _callCheckThread = threading.Thread(target=callCheckThread, args=(1,), daemon=True)
   _tapCheckThread = threading.Thread(target=tapCheckThread, args=(1,), daemon=True)
   ins = RhythmGame(xoffset=-60)
-  #checkCall = threading.Thread(target=ins.check_call, args=(1,))
   ins.run_game()
