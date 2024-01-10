@@ -32,7 +32,8 @@ def callCheckThread():
   time.sleep(1)
   while True:
     if TLcalled:
-      c.Call(ins.squareTL, ins.lvl_pause)
+      #c.Call(ins.squareTL, ins.lvl_pause)
+      print(str(ins.squareTL.gotit))
     if MTcalled:
       c.Call(ins.squareMT, ins.lvl_pause)
     if TRcalled:
@@ -128,11 +129,21 @@ class RhythmGame:
     self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
 
   def RHYTHM(self, level, level_pause):
+    global TLcalled
+    global MTcalled
+    global TRcalled
+    global MLcalled
+    global MMcalled
+    global MRcalled
+    global BLcalled
+    global MBcalled
+    global BRcalled
+
     self.level_pause = level_pause
     for beat in level:
       if beat == 1: # Upper left
         pass # Flash the correct square
-        self.squareTL.call(level_pause)
+        TLcalled = True #self.squareTL.call(level_pause)
       if beat == 2: # Upper middle
         pass # Flash the correct square
         time.sleep(level_pause)
@@ -285,4 +296,5 @@ if __name__ == '__main__':
   _callCheckThread = threading.Thread(target=callCheckThread, args=(1,), daemon=True)
   _tapCheckThread = threading.Thread(target=tapCheckThread, args=(1,), daemon=True)
   ins = RhythmGame(xoffset=-60)
+  print("Test Print")
   ins.run_game()
