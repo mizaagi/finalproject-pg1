@@ -20,4 +20,5 @@ class Square:
     self.screen.blit(self.image, self.rect)
 
   def call(self, lvl_pause):
+    #print("Square Call / exec nameCalled = True | Test Print")
     exec(self.name + "called = True")
