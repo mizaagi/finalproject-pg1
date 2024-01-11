@@ -18,6 +18,8 @@ green = (0, 255, 0)
 blue = (50, 150, 210)
 lvl1 = [7]
 lvl1_pause = 2
+
+
 TLcalled = None
 MTcalled = None
 TRcalled = None
@@ -147,6 +149,8 @@ class RhythmGame:
     self.xoffset = xoffset
     self.yoffset = yoffset
     self.score = 0
+    self.accList = []
+    self.acc = 0
     self.level = 1
     self.lvl_pause = lvl1_pause
 
@@ -168,6 +172,10 @@ class RhythmGame:
   def yourScore(self, score):
     msg = font_style.render("Score: " + str(score), True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
+
+  def yourAcc(self, acc):
+    msg = font_style.render("Acc: " + str(acc) + "%", True, yellow)
+    self.screen.blit(msg, [750+self.xoffset, 90+self.yoffset])
 
   def RHYTHM(self, level, level_pause):
     global TLcalled
@@ -271,6 +279,11 @@ class RhythmGame:
       self.squareBL.blitme()
       self.squareMB.blitme()
       self.squareBR.blitme()
+      try:
+        self.acc = sum(self.accList) / float(len(self.accList))
+      except:
+        self.acc = 100
+      self.yourAcc(self.acc)
       self.yourScore(self.score)
       
       # Make the most recently drawn screen visible.
