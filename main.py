@@ -16,7 +16,7 @@ black = (0, 0, 0)
 red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
-lvl1 = [1]
+lvl1 = [7]
 lvl1_pause = 2
 TLcalled = None
 MTcalled = None
@@ -28,31 +28,71 @@ BLcalled = None
 MBcalled = None
 BRcalled = None
 
+def setGlobals():
+  global TLcalled
+  global MTcalled
+  global TRcalled
+  global MLcalled
+  global MMcalled
+  global MRcalled
+  global BLcalled
+  global MBcalled
+  global BRcalled
+
 def callCheckThread():
   time.sleep(1)
+  #print("callCheckThread Started | Test Print")
+  global TLcalled
+  global MTcalled
+  global TRcalled
+  global MLcalled
+  global MMcalled
+  global MRcalled
+  global BLcalled
+  global MBcalled
+  global BRcalled
   while True:
     if TLcalled:
-      #c.Call(ins.squareTL, ins.lvl_pause)
+      #print("callCheckThread if TLcalled | Test Print")
+      c.Call(ins.squareTL, ins.lvl_pause)
       print(str(ins.squareTL.gotit))
+      TLcalled = False
     if MTcalled:
       c.Call(ins.squareMT, ins.lvl_pause)
+      print(str(ins.squareMT.gotit))
+      MTcalled = False
     if TRcalled:
       c.Call(ins.squareTR, ins.lvl_pause)
+      print(str(ins.squareTR.gotit))
+      TRcalled = False
     if MLcalled:
       c.Call(ins.squareML, ins.lvl_pause)
+      print(str(ins.squareML.gotit))
+      MLcalled = False
     if MMcalled:
       c.Call(ins.squareMM, ins.lvl_pause)
+      print(str(ins.squareMM.gotit))
+      MMcalled = False
     if MRcalled:
       c.Call(ins.squareMR, ins.lvl_pause)
+      print(str(ins.squareMR.gotit))
+      MRcalled = False
     if BLcalled:
       c.Call(ins.squareBL, ins.lvl_pause)
+      print(str(ins.squareBL.gotit))
+      BLcalled = False
     if MBcalled:
       c.Call(ins.squareMB, ins.lvl_pause)
+      print(str(ins.squareMB.gotit))
+      MBcalled = False
     if BRcalled:
       c.Call(ins.squareBR, ins.lvl_pause)
+      print(str(ins.squareBR.gotit))
+      BRcalled = False
 
 def tapCheckThread():
   time.sleep(1)
+  #print("tapCheckThread Started | Test Print")
   while True:
     # Watch for keyboard and mouse events.
     for event in pygame.event.get():
@@ -70,6 +110,7 @@ def tapCheckThread():
         if event.key == pygame.K_KP_6:
           ins.squareMR.tapped = True
         if event.key == pygame.K_KP_7:
+          #print("tapCheckThread | Test Print")
           ins.squareTL.tapped = True
         if event.key == pygame.K_KP_8:
           ins.squareMT.tapped = True
@@ -141,33 +182,25 @@ class RhythmGame:
 
     self.level_pause = level_pause
     for beat in level:
-      if beat == 1: # Upper left
-        pass # Flash the correct square
+      if beat == 7: # Upper left
+        #print("RHYTHM nameCalled = True | Test Print")
         TLcalled = True #self.squareTL.call(level_pause)
-      if beat == 2: # Upper middle
-        pass # Flash the correct square
-        time.sleep(level_pause)
-      if beat == 3: # Upper right
-        pass # Flash the correct square
-        time.sleep(level_pause)
+      if beat == 8: # Upper middle
+        TLcalled = True
+      if beat == 9: # Upper right
+        TLcalled = True
       if beat == 4: # Middle left
-        pass # Flash the correct square
-        time.sleep(level_pause)
+        TLcalled = True
       if beat == 5: # Middle
-        pass # Flash the correct square
-        time.sleep(level_pause)
+        TLcalled = True
       if beat == 6: # Middle right
-        pass # Flash the correct square
-        time.sleep(level_pause)
-      if beat == 7: # Lower left
-        pass # Flash the correct square
-        time.sleep(level_pause)
-      if beat == 8: # Lower middle
-        pass # Flash the correct square
-        time.sleep(level_pause)
-      if beat == 9: # Lower right
-        pass # Flash the correct square
-        time.sleep(level_pause)
+        TLcalled = True
+      if beat == 1: # Lower left
+        TLcalled = True
+      if beat == 2: # Lower middle
+        TLcalled = True
+      if beat == 3: # Lower right
+        TLcalled = True
     
 
   def run_game(self):
@@ -179,6 +212,7 @@ class RhythmGame:
           sys.exit()
         if event.type == pygame.KEYDOWN:
           if event.key == pygame.K_RETURN:
+            #print("Pressing Enter | Test Print")
             self.RHYTHM(lvl1, lvl1_pause)
           if event.key == pygame.K_KP_1:
             self.squareBL.tapped = True
@@ -293,8 +327,10 @@ class RhythmGame:
 
 if __name__ == '__main__':
   # Make a game instance, and run the game.
-  _callCheckThread = threading.Thread(target=callCheckThread, args=(1,), daemon=True)
-  _tapCheckThread = threading.Thread(target=tapCheckThread, args=(1,), daemon=True)
+  _callCheckThread = threading.Thread(target=callCheckThread, daemon=True)
+  _tapCheckThread = threading.Thread(target=tapCheckThread, daemon=True)
   ins = RhythmGame(xoffset=-60)
-  print("Test Print")
+  #print("Start Game | Test Print")
+  _callCheckThread.start()
+  _tapCheckThread.start()
   ins.run_game()
