@@ -17,7 +17,11 @@ red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
 lvl1 = [7, 4, 3, 7, 6, 9, 1, 3, 6, 6, 5, 3]
-lvl1_pause = 2
+lvl1_pause = 2.0
+lvl2 = [7, 4, 3, 7, 6, 9, 1, 3, 6, 6, 5, 3]
+lvl2_pause = 1.5
+lvl3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+lvl3_pause = 0.3
 
 
 TLcalled = None
@@ -57,39 +61,40 @@ def callCheckThread():
     if TLcalled:
       #print("callCheckThread if TLcalled | Test Print")
       c.Call(ins.squareTL, ins.lvl_pause, ins)
-      print(str(ins.squareTL.gotit))
+      #print(str(ins.squareTL.gotit))
+      print(ins.lvl_pause)
       TLcalled = False
     if MTcalled:
       c.Call(ins.squareMT, ins.lvl_pause, ins)
-      print(str(ins.squareMT.gotit))
+      #print(str(ins.squareMT.gotit))
       MTcalled = False
     if TRcalled:
       c.Call(ins.squareTR, ins.lvl_pause, ins)
-      print(str(ins.squareTR.gotit))
+      #print(str(ins.squareTR.gotit))
       TRcalled = False
     if MLcalled:
       c.Call(ins.squareML, ins.lvl_pause, ins)
-      print(str(ins.squareML.gotit))
+      #print(str(ins.squareML.gotit))
       MLcalled = False
     if MMcalled:
       c.Call(ins.squareMM, ins.lvl_pause, ins)
-      print(str(ins.squareMM.gotit))
+      #print(str(ins.squareMM.gotit))
       MMcalled = False
     if MRcalled:
       c.Call(ins.squareMR, ins.lvl_pause, ins)
-      print(str(ins.squareMR.gotit))
+      #print(str(ins.squareMR.gotit))
       MRcalled = False
     if BLcalled:
       c.Call(ins.squareBL, ins.lvl_pause, ins)
-      print(str(ins.squareBL.gotit))
+      #print(str(ins.squareBL.gotit))
       BLcalled = False
     if MBcalled:
       c.Call(ins.squareMB, ins.lvl_pause, ins)
-      print(str(ins.squareMB.gotit))
+      #print(str(ins.squareMB.gotit))
       MBcalled = False
     if BRcalled:
       c.Call(ins.squareBR, ins.lvl_pause, ins)
-      print(str(ins.squareBR.gotit))
+      #print(str(ins.squareBR.gotit))
       BRcalled = False
 
 def tapCheckThread():
@@ -192,6 +197,7 @@ class RhythmGame:
     global MBcalled
     global BRcalled
 
+    time.sleep(1)
     self.level_pause = level_pause
     for beat in level:
       if beat == 7: # Upper left
@@ -236,6 +242,16 @@ class RhythmGame:
           if event.key == pygame.K_RETURN:
             #print("Pressing Enter | Test Print")
             self.RHYTHM(lvl1, lvl1_pause)
+          if event.key == pygame.K_y:
+            self.level = 2
+            self.level_pause = lvl2_pause
+            self.lvl_pause = lvl2_pause
+            self.RHYTHM(lvl2, lvl2_pause)
+          if event.key == pygame.K_u:
+            self.level = 3
+            self.level_pause = lvl3_pause
+            self.lvl_pause = lvl3_pause
+            self.RHYTHM(lvl3, lvl3_pause)
           if event.key == pygame.K_KP_1:
             self.squareBL.tapped = True
             self.squareBL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
