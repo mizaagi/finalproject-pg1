@@ -16,7 +16,7 @@ black = (0, 0, 0)
 red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
-lvl1 = [7, 8, 9]
+lvl1 = [7, 4, 3, 7, 6, 9, 1, 3, 6, 6, 5, 3]
 lvl1_pause = 2
 
 
@@ -56,39 +56,39 @@ def callCheckThread():
   while True:
     if TLcalled:
       #print("callCheckThread if TLcalled | Test Print")
-      c.Call(ins.squareTL, ins.lvl_pause)
+      c.Call(ins.squareTL, ins.lvl_pause, ins)
       print(str(ins.squareTL.gotit))
       TLcalled = False
     if MTcalled:
-      c.Call(ins.squareMT, ins.lvl_pause)
+      c.Call(ins.squareMT, ins.lvl_pause, ins)
       print(str(ins.squareMT.gotit))
       MTcalled = False
     if TRcalled:
-      c.Call(ins.squareTR, ins.lvl_pause)
+      c.Call(ins.squareTR, ins.lvl_pause, ins)
       print(str(ins.squareTR.gotit))
       TRcalled = False
     if MLcalled:
-      c.Call(ins.squareML, ins.lvl_pause)
+      c.Call(ins.squareML, ins.lvl_pause, ins)
       print(str(ins.squareML.gotit))
       MLcalled = False
     if MMcalled:
-      c.Call(ins.squareMM, ins.lvl_pause)
+      c.Call(ins.squareMM, ins.lvl_pause, ins)
       print(str(ins.squareMM.gotit))
       MMcalled = False
     if MRcalled:
-      c.Call(ins.squareMR, ins.lvl_pause)
+      c.Call(ins.squareMR, ins.lvl_pause, ins)
       print(str(ins.squareMR.gotit))
       MRcalled = False
     if BLcalled:
-      c.Call(ins.squareBL, ins.lvl_pause)
+      c.Call(ins.squareBL, ins.lvl_pause, ins)
       print(str(ins.squareBL.gotit))
       BLcalled = False
     if MBcalled:
-      c.Call(ins.squareMB, ins.lvl_pause)
+      c.Call(ins.squareMB, ins.lvl_pause, ins)
       print(str(ins.squareMB.gotit))
       MBcalled = False
     if BRcalled:
-      c.Call(ins.squareBR, ins.lvl_pause)
+      c.Call(ins.squareBR, ins.lvl_pause, ins)
       print(str(ins.squareBR.gotit))
       BRcalled = False
 
@@ -178,7 +178,7 @@ class RhythmGame:
     self.screen.blit(msg, [750+self.xoffset, 90+self.yoffset])
   
   def yourTick(self, tick):
-    msg = font_style.render("Tick: " + str(tick), True, yellow)
+    msg = font_style.render("Tick: " + str(tick)[-1], True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 150+self.yoffset])
 
   def RHYTHM(self, level, level_pause):
@@ -197,31 +197,31 @@ class RhythmGame:
       if beat == 7: # Upper left
         #print("RHYTHM nameCalled = True | Test Print")
         TLcalled = True #self.squareTL.call(level_pause)
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 8: # Upper middle
         MTcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 9: # Upper right
         TRcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 4: # Middle left
         MLcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 5: # Middle
         MMcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 6: # Middle right
         MRcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 1: # Lower left
         BLcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 2: # Lower middle
         MBcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       if beat == 3: # Lower right
         BRcalled = True
-        time.sleep(self.level_pause)
+        #time.sleep(self.level_pause)
       
     
 
