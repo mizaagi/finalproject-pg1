@@ -16,7 +16,7 @@ black = (0, 0, 0)
 red = (210, 50, 80)
 green = (0, 255, 0)
 blue = (50, 150, 210)
-lvl1 = [7]
+lvl1 = [7, 8, 9]
 lvl1_pause = 2
 
 
@@ -176,6 +176,10 @@ class RhythmGame:
   def yourAcc(self, acc):
     msg = font_style.render("Acc: " + str(acc) + "%", True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 90+self.yoffset])
+  
+  def yourTick(self, tick):
+    msg = font_style.render("Tick: " + str(tick), True, yellow)
+    self.screen.blit(msg, [750+self.xoffset, 150+self.yoffset])
 
   def RHYTHM(self, level, level_pause):
     global TLcalled
@@ -193,22 +197,32 @@ class RhythmGame:
       if beat == 7: # Upper left
         #print("RHYTHM nameCalled = True | Test Print")
         TLcalled = True #self.squareTL.call(level_pause)
+        time.sleep(self.level_pause)
       if beat == 8: # Upper middle
-        TLcalled = True
+        MTcalled = True
+        time.sleep(self.level_pause)
       if beat == 9: # Upper right
-        TLcalled = True
+        TRcalled = True
+        time.sleep(self.level_pause)
       if beat == 4: # Middle left
-        TLcalled = True
+        MLcalled = True
+        time.sleep(self.level_pause)
       if beat == 5: # Middle
-        TLcalled = True
+        MMcalled = True
+        time.sleep(self.level_pause)
       if beat == 6: # Middle right
-        TLcalled = True
+        MRcalled = True
+        time.sleep(self.level_pause)
       if beat == 1: # Lower left
-        TLcalled = True
+        BLcalled = True
+        time.sleep(self.level_pause)
       if beat == 2: # Lower middle
-        TLcalled = True
+        MBcalled = True
+        time.sleep(self.level_pause)
       if beat == 3: # Lower right
-        TLcalled = True
+        BRcalled = True
+        time.sleep(self.level_pause)
+      
     
 
   def run_game(self):
