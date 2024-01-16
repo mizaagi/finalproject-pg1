@@ -101,23 +101,32 @@ def tapCheckThread():
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_KP_1:
           ins.squareBL.tapped = True
+          ins.lasttap = 1
         if event.key == pygame.K_KP_2:
           ins.squareMB.tapped = True
+          ins.lasttap = 2
         if event.key == pygame.K_KP_3:
           ins.squareBR.tapped = True
+          ins.lasttap = 3
         if event.key == pygame.K_KP_4:
           ins.squareML.tapped = True
+          ins.lasttap = 4
         if event.key == pygame.K_KP_5:
           ins.squareMM.tapped = True
+          ins.lasttap = 5
         if event.key == pygame.K_KP_6:
           ins.squareMR.tapped = True
+          ins.lasttap = 6
         if event.key == pygame.K_KP_7:
           #print("tapCheckThread | Test Print")
           ins.squareTL.tapped = True
+          ins.lasttap = 7
         if event.key == pygame.K_KP_8:
           ins.squareMT.tapped = True
+          ins.lasttap = 8
         if event.key == pygame.K_KP_9:
           ins.squareTR.tapped = True
+          ins.lasttap = 9
       if event.type == pygame.KEYUP:
         if event.key == pygame.K_KP_1:
           ins.squareBL.tapped = False
@@ -153,6 +162,7 @@ class RhythmGame:
     self.acc = 0
     self.level = 1
     self.lvl_pause = lvl1_pause
+    self.lasttap = 0
 
     self.screen = pygame.display.set_mode(
       (self.settings.screen_width, self.settings.screen_height))
