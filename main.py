@@ -7,6 +7,7 @@ from settings import Settings
 from square import Square
 import caller as c
 import threading
+import random
 pygame.init()
 
 font_style = pygame.font.SysFont("sans-serif", 30)
@@ -22,6 +23,7 @@ lvl2 = [7, 4, 3, 7, 6, 9, 1, 3, 6, 6, 5, 3]
 lvl2_pause = 1.5
 lvl3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 lvl3_pause = 0.3
+done = False
 
 
 TLcalled = None
@@ -62,38 +64,47 @@ def callCheckThread():
       #print("callCheckThread if TLcalled | Test Print")
       c.Call(ins.squareTL, ins.lvl_pause, ins)
       #print(str(ins.squareTL.gotit))
+      ins.callDone = True
       print(ins.lvl_pause)
       TLcalled = False
     if MTcalled:
       c.Call(ins.squareMT, ins.lvl_pause, ins)
       #print(str(ins.squareMT.gotit))
+      ins.callDone = True
       MTcalled = False
     if TRcalled:
       c.Call(ins.squareTR, ins.lvl_pause, ins)
       #print(str(ins.squareTR.gotit))
+      ins.callDone = True
       TRcalled = False
     if MLcalled:
       c.Call(ins.squareML, ins.lvl_pause, ins)
       #print(str(ins.squareML.gotit))
+      ins.callDone = True
       MLcalled = False
     if MMcalled:
       c.Call(ins.squareMM, ins.lvl_pause, ins)
       #print(str(ins.squareMM.gotit))
+      ins.callDone = True
       MMcalled = False
     if MRcalled:
       c.Call(ins.squareMR, ins.lvl_pause, ins)
       #print(str(ins.squareMR.gotit))
+      ins.callDone = True
       MRcalled = False
     if BLcalled:
       c.Call(ins.squareBL, ins.lvl_pause, ins)
       #print(str(ins.squareBL.gotit))
+      ins.callDone = True
       BLcalled = False
     if MBcalled:
       c.Call(ins.squareMB, ins.lvl_pause, ins)
       #print(str(ins.squareMB.gotit))
+      ins.callDone = True
       MBcalled = False
     if BRcalled:
       c.Call(ins.squareBR, ins.lvl_pause, ins)
+      ins.callDone = True
       #print(str(ins.squareBR.gotit))
       BRcalled = False
 
@@ -158,6 +169,7 @@ class RhythmGame:
     self.acc = 0
     self.level = 1
     self.lvl_pause = lvl1_pause
+    self.callDone = False
 
     self.screen = pygame.display.set_mode(
       (self.settings.screen_width, self.settings.screen_height))
@@ -175,7 +187,7 @@ class RhythmGame:
 
     self.bg_color = (25, 60, 105)
   def yourScore(self, score):
-    msg = font_style.render("Score: " + str(score), True, yellow)
+    msg = font_style.render("Score: " + str(score) + "    Level: " + str(self.level), True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 30+self.yoffset])
 
   def yourAcc(self, acc):
@@ -185,6 +197,14 @@ class RhythmGame:
   def yourTick(self, tick):
     msg = font_style.render("Tick: " + str(tick)[-1], True, yellow)
     self.screen.blit(msg, [750+self.xoffset, 150+self.yoffset])
+
+  def yourInstructions(self):
+    p1 = font_style.render("Instructions: Press [RETURN] for level 1,", True, yellow)
+    p2 = font_style.render("[Y] for level 2, [U] for level 3, or press [R] for", True, yellow)
+    p3 = font_style.render("a randomly generated level. Have fun!", True, yellow)
+    self.screen.blit(p1, [750 + self.xoffset, 210 + self.yoffset])
+    self.screen.blit(p2, [760 + self.xoffset, 240 + self.yoffset])
+    self.screen.blit(p3, [760 + self.xoffset, 270 + self.yoffset])
 
   def RHYTHM(self, level, level_pause):
     global TLcalled
@@ -199,34 +219,49 @@ class RhythmGame:
 
     time.sleep(1)
     self.level_pause = level_pause
+    self.acc = 100
+    self.score = 0
+    self.accList.clear()
+
     for beat in level:
-      if beat == 7: # Upper left
-        #print("RHYTHM nameCalled = True | Test Print")
-        TLcalled = True #self.squareTL.call(level_pause)
-        #time.sleep(self.level_pause)
-      if beat == 8: # Upper middle
-        MTcalled = True
-        #time.sleep(self.level_pause)
-      if beat == 9: # Upper right
-        TRcalled = True
-        #time.sleep(self.level_pause)
-      if beat == 4: # Middle left
-        MLcalled = True
-        #time.sleep(self.level_pause)
-      if beat == 5: # Middle
-        MMcalled = True
-        #time.sleep(self.level_pause)
-      if beat == 6: # Middle right
-        MRcalled = True
+      self.done = False
+      c = 0
         #time.sleep(self.level_pause)
       if beat == 1: # Lower left
         BLcalled = True
+
         #time.sleep(self.level_pause)
       if beat == 2: # Lower middle
         MBcalled = True
+
         #time.sleep(self.level_pause)
       if beat == 3: # Lower right
         BRcalled = True
+        #time.sleep(self.level_pause)
+
+      if beat == 4: # Middle left
+        MLcalled = True
+
+        #time.sleep(self.level_pause)
+      if beat == 5: # Middle
+        MMcalled = True
+
+        #time.sleep(self.level_pause)
+      if beat == 6: # Middle right
+        MRcalled = True
+
+      if beat == 7:  # Upper left
+        # print("RHYTHM nameCalled = True | Test Print")
+        TLcalled = True  # self.squareTL.call(level_pause)
+
+        # time.sleep(self.level_pause)
+      if beat == 8:  # Upper middle
+        MTcalled = True
+
+        # time.sleep(self.level_pause)
+      if beat == 9:  # Upper right
+        TRcalled = True
+
         #time.sleep(self.level_pause)
       
     
@@ -252,6 +287,15 @@ class RhythmGame:
             self.level_pause = lvl3_pause
             self.lvl_pause = lvl3_pause
             self.RHYTHM(lvl3, lvl3_pause)
+          if event.key == pygame.K_r:
+            self.level = 0
+            rndLevel_pause = random.random() + random.random() * random.random()
+            rndLevel = []
+            for _ in range(1, random.randint(9, 27)):
+              rndLevel.append(random.randint(1, 9))
+              print(rndLevel)
+            self.RHYTHM(rndLevel, rndLevel_pause)
+
           if event.key == pygame.K_KP_1:
             self.squareBL.tapped = True
             self.squareBL.image = pygame.transform.scale(pygame.image.load('pressed_square.png'), (175, 175))
@@ -315,6 +359,7 @@ class RhythmGame:
         self.acc = 100
       self.yourAcc(self.acc)
       self.yourScore(self.score)
+      self.yourInstructions()
       
       # Make the most recently drawn screen visible.
       pygame.display.flip()
