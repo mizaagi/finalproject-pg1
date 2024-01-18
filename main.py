@@ -65,7 +65,7 @@ def callCheckThread():
       c.Call(ins.squareTL, ins.lvl_pause, ins)
       #print(str(ins.squareTL.gotit))
       ins.callDone = True
-      print(ins.lvl_pause)
+      #print(ins.lvl_pause)
       TLcalled = False
     if MTcalled:
       c.Call(ins.squareMT, ins.lvl_pause, ins)
@@ -293,7 +293,6 @@ class RhythmGame:
             rndLevel = []
             for _ in range(1, random.randint(9, 27)):
               rndLevel.append(random.randint(1, 9))
-              print(rndLevel)
             self.RHYTHM(rndLevel, rndLevel_pause)
 
           if event.key == pygame.K_KP_1:
